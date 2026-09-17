@@ -1,0 +1,8 @@
+{
+  "total": 3,
+  "itemSummaries": [
+    {"itemId": "demo-1", "title": "Pokémon Charizard Base Set 4/102 Holo", "price": {"value": "150.00", "currency": "USD"}},
+    {"itemId": "demo-2", "title": "Umbreon VMAX 215/203 Evolving Skies", "price": {"value": "800.00", "currency": "USD"}},
+    {"itemId": "demo-3", "title": "Charizard Brilliant Stars 154/172"}
+  ]
+}

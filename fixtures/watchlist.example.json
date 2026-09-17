@@ -1,0 +1,47 @@
+{
+  "poll_seconds": 30,
+  "marketplace": "EBAY_US",
+  "category_id": "183454",
+  "page_size": 200,
+  "max_pages": 1,
+  "state_file": "data/state.sqlite3",
+  "notify_existing": false,
+  "watchlist": [
+    {
+      "name": "Charizard — Base Set",
+      "terms": [
+        [
+          "Charizard"
+        ],
+        [
+          "Base Set",
+          "Base"
+        ]
+      ]
+    },
+    {
+      "name": "Umbreon VMAX 215/203",
+      "terms": [
+        [
+          "Umbreon"
+        ],
+        [
+          "VMAX"
+        ],
+        [
+          "215/203",
+          "215"
+        ]
+      ]
+    },
+    {
+      "name": "Any Evolving Skies card",
+      "terms": [
+        [
+          "Evolving Skies",
+          "EVS"
+        ]
+      ]
+    }
+  ]
+}

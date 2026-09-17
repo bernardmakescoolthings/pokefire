@@ -1,0 +1,31 @@
+# Local environment and API tokens (keep the shareable template)
+.env
+.env.*
+!.env.example
+.envrc
+
+# Credentials and private key stores
+secrets/
+.secrets/
+credentials.json
+credentials.*.json
+service-account*.json
+service_account*.json
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Local data, databases, logs, and backups
+data/
+*.sqlite3
+*.sqlite3-*
+*.sqlite
+*.sqlite-*
+*.log
+*.bak
+
+# Python environment and caches
+__pycache__/
+*.pyc
+.venv/

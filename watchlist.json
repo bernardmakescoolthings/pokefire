@@ -1,0 +1,1319 @@
+{
+  "discord": {
+    "enabled": true,
+    "channel_id": "1549949739439497246"
+  },
+  "poll_seconds": 120,
+  "marketplace": "EBAY_US",
+  "category_id": "183454",
+  "page_size": 240,
+  "max_pages": 1,
+  "state_file": "data/state.sqlite3",
+  "notify_existing": false,
+  "watchlist": [
+    {
+      "name": "Mudkip Gold Star \u2014 Team Rocket Returns 107/109 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Mudkip",
+        "set": "Team Rocket Returns",
+        "number": "107/109"
+      },
+      "terms": [
+        [
+          "Mudkip"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Mudkip Star",
+          "107/109"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex7/107/low.webp"
+    },
+    {
+      "name": "Torchic Gold Star \u2014 Team Rocket Returns 108/109 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Torchic",
+        "set": "Team Rocket Returns",
+        "number": "108/109"
+      },
+      "terms": [
+        [
+          "Torchic"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Torchic Star",
+          "108/109"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex7/108/low.webp"
+    },
+    {
+      "name": "Treecko Gold Star \u2014 Team Rocket Returns 109/109 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Treecko",
+        "set": "Team Rocket Returns",
+        "number": "109/109"
+      },
+      "terms": [
+        [
+          "Treecko"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Treecko Star",
+          "109/109"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex7/109/low.webp"
+    },
+    {
+      "name": "Latias Gold Star \u2014 Deoxys 105/107 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Latias",
+        "set": "Deoxys",
+        "number": "105/107"
+      },
+      "terms": [
+        [
+          "Latias"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Latias Star",
+          "105/107"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex8/105/low.webp"
+    },
+    {
+      "name": "Latios Gold Star \u2014 Deoxys 106/107 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Latios",
+        "set": "Deoxys",
+        "number": "106/107"
+      },
+      "terms": [
+        [
+          "Latios"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Latios Star",
+          "106/107"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex8/106/low.webp"
+    },
+    {
+      "name": "Rayquaza Gold Star \u2014 Deoxys 107/107 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Rayquaza",
+        "set": "Deoxys",
+        "number": "107/107"
+      },
+      "terms": [
+        [
+          "Rayquaza"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Rayquaza Star",
+          "107/107"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex8/107/low.webp"
+    },
+    {
+      "name": "Entei Gold Star \u2014 Unseen Forces 113/115 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Entei",
+        "set": "Unseen Forces",
+        "number": "113/115"
+      },
+      "terms": [
+        [
+          "Entei"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Entei Star",
+          "113/115"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex10/113/low.webp"
+    },
+    {
+      "name": "Raikou Gold Star \u2014 Unseen Forces 114/115 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Raikou",
+        "set": "Unseen Forces",
+        "number": "114/115"
+      },
+      "terms": [
+        [
+          "Raikou"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Raikou Star",
+          "114/115"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex10/114/low.webp"
+    },
+    {
+      "name": "Suicune Gold Star \u2014 Unseen Forces 115/115 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Suicune",
+        "set": "Unseen Forces",
+        "number": "115/115"
+      },
+      "terms": [
+        [
+          "Suicune"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Suicune Star",
+          "115/115"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex10/115/low.webp"
+    },
+    {
+      "name": "Groudon Gold Star \u2014 Delta Species 111/113 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Groudon",
+        "set": "Delta Species",
+        "number": "111/113"
+      },
+      "terms": [
+        [
+          "Groudon"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Groudon Star",
+          "111/113"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex11/111/low.webp"
+    },
+    {
+      "name": "Kyogre Gold Star \u2014 Delta Species 112/113 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Kyogre",
+        "set": "Delta Species",
+        "number": "112/113"
+      },
+      "terms": [
+        [
+          "Kyogre"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Kyogre Star",
+          "112/113"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex11/112/low.webp"
+    },
+    {
+      "name": "Metagross Gold Star \u2014 Delta Species 113/113 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Metagross",
+        "set": "Delta Species",
+        "number": "113/113"
+      },
+      "terms": [
+        [
+          "Metagross"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Metagross Star",
+          "113/113"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex11/113/low.webp"
+    },
+    {
+      "name": "Regice Gold Star \u2014 Legend Maker 90/92 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Regice",
+        "set": "Legend Maker",
+        "number": "90/92"
+      },
+      "terms": [
+        [
+          "Regice"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Regice Star",
+          "90/92"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex12/90/low.webp"
+    },
+    {
+      "name": "Regirock Gold Star \u2014 Legend Maker 91/92 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Regirock",
+        "set": "Legend Maker",
+        "number": "91/92"
+      },
+      "terms": [
+        [
+          "Regirock"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Regirock Star",
+          "91/92"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex12/91/low.webp"
+    },
+    {
+      "name": "Registeel Gold Star \u2014 Legend Maker 92/92 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Registeel",
+        "set": "Legend Maker",
+        "number": "92/92"
+      },
+      "terms": [
+        [
+          "Registeel"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Registeel Star",
+          "92/92"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex12/92/low.webp"
+    },
+    {
+      "name": "Gyarados Gold Star \u2014 Holon Phantoms 102/110 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Gyarados",
+        "set": "Holon Phantoms",
+        "number": "102/110"
+      },
+      "terms": [
+        [
+          "Gyarados"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Gyarados Star",
+          "102/110"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex13/102/low.webp"
+    },
+    {
+      "name": "Mewtwo Gold Star \u2014 Holon Phantoms 103/110 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Mewtwo",
+        "set": "Holon Phantoms",
+        "number": "103/110"
+      },
+      "terms": [
+        [
+          "Mewtwo"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Mewtwo Star",
+          "103/110"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex13/103/low.webp"
+    },
+    {
+      "name": "Pikachu Gold Star \u2014 Holon Phantoms 104/110 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Pikachu",
+        "set": "Holon Phantoms",
+        "number": "104/110"
+      },
+      "terms": [
+        [
+          "Pikachu"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Pikachu Star",
+          "104/110"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex13/104/low.webp"
+    },
+    {
+      "name": "Alakazam Gold Star \u2014 Crystal Guardians 99/100 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Alakazam",
+        "set": "Crystal Guardians",
+        "number": "99/100"
+      },
+      "terms": [
+        [
+          "Alakazam"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Alakazam Star",
+          "99/100"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex14/99/low.webp"
+    },
+    {
+      "name": "Celebi Gold Star \u2014 Crystal Guardians 100/100 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Celebi",
+        "set": "Crystal Guardians",
+        "number": "100/100"
+      },
+      "terms": [
+        [
+          "Celebi"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Celebi Star",
+          "100/100"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex14/100/low.webp"
+    },
+    {
+      "name": "Charizard Gold Star \u2014 Dragon Frontiers 100/101 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Charizard",
+        "set": "Dragon Frontiers",
+        "number": "100/101"
+      },
+      "terms": [
+        [
+          "Charizard"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Charizard Star",
+          "100/101"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex15/100/low.webp"
+    },
+    {
+      "name": "Mew Gold Star \u2014 Dragon Frontiers 101/101 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Mew",
+        "set": "Dragon Frontiers",
+        "number": "101/101"
+      },
+      "terms": [
+        [
+          "Mew"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Mew Star",
+          "101/101"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex15/101/low.webp"
+    },
+    {
+      "name": "Flareon Gold Star \u2014 Power Keepers 100/108 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Flareon",
+        "set": "Power Keepers",
+        "number": "100/108"
+      },
+      "terms": [
+        [
+          "Flareon"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Flareon Star",
+          "100/108"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex16/100/low.webp"
+    },
+    {
+      "name": "Jolteon Gold Star \u2014 Power Keepers 101/108 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Jolteon",
+        "set": "Power Keepers",
+        "number": "101/108"
+      },
+      "terms": [
+        [
+          "Jolteon"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Jolteon Star",
+          "101/108"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex16/101/low.webp"
+    },
+    {
+      "name": "Vaporeon Gold Star \u2014 Power Keepers 102/108 \u2014 PSA 10",
+      "card": {
+        "pokemon": "Vaporeon",
+        "set": "Power Keepers",
+        "number": "102/108"
+      },
+      "terms": [
+        [
+          "Vaporeon"
+        ],
+        [
+          "Gold Star",
+          "Goldstar",
+          "Vaporeon Star",
+          "102/108"
+        ]
+      ],
+      "grading": {
+        "company": "PSA",
+        "min": 10,
+        "max": 10
+      },
+      "exclude": [
+        "Celebrations",
+        "25th",
+        "2021",
+        "reprint",
+        "proxy",
+        "custom",
+        "replica",
+        "digital",
+        "World Championships",
+        "Japanese",
+        "JPN",
+        "JAP",
+        "JP",
+        "Chinese",
+        "Korean",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Portuguese",
+        "non holo",
+        "nonholo",
+        "reverse holo",
+        "reverse foil"
+      ],
+      "enabled": true,
+      "image_url": "https://assets.tcgdex.net/en/ex/ex16/102/low.webp"
+    }
+  ],
+  "query": "PSA 10 (star,goldstar,90,91,92,99,100,101,102,103,104,105,106,107,108,109,111,112,113,114,115)",
+  "environment": "production",
+  "ebay_poll_seconds": 120,
+  "auction_poll_seconds": 900
+}
