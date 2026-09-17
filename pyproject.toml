@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "An eBay watchlist monitor using Scrapingdog, with local listings and price history."
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["uvicorn>=0.34,<1"]
 
 [project.scripts]
 pokefire = "pokefire.__main__:main"

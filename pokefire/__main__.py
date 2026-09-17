@@ -1,10 +1,6 @@
-"""Run the dashboard and scraper: python -m pokefire."""
+"""Run the dashboard and scraper with Uvicorn: python -m pokefire."""
 
-from pokefire.viewer import main as viewer_main
-
-
-def main():
-    viewer_main(start_monitor=True)
+from pokefire.server import main
 
 
 if __name__ == "__main__":

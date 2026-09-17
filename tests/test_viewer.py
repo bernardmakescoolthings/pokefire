@@ -8,82 +8,7 @@ from unittest.mock import patch, Mock
 
 from pokefire.monitor_lock import MonitorLock, running
 from pokefire.monitor import matches
-from pokefire.viewer import Controller, handler_for, read_export, main
-
-
-class EntrypointTests(unittest.TestCase):
-    def setUp(self):
-        temp = tempfile.TemporaryDirectory()
-        self.addCleanup(temp.cleanup)
-        self.root = Path(temp.name)
-        self.enterContext(patch('pokefire.viewer.ROOT', self.root))
-        self.enterContext(patch.dict(os.environ, {}, clear=True))
-
-    @patch('pokefire.viewer.signal.signal')
-    @patch('pokefire.viewer.ThreadingHTTPServer')
-    @patch('pokefire.viewer.Controller')
-    def test_port_configuration_precedence(self, controller_cls, server_cls, signal):
-        server_cls.return_value.serve_forever.side_effect = KeyboardInterrupt
-        for file_port, env_port, cli_port, expected in [
-            (None, None, None, 8765),
-            ('9000', None, None, 9000),
-            ('9000', '9001', None, 9001),
-            ('9000', 'invalid', '9002', 9002),
-        ]:
-            with self.subTest(file=file_port, env=env_port, cli=cli_port):
-                (self.root / '.env').write_text('' if file_port is None else f'PORT={file_port}\n')
-                argv = ['pokefire'] + (['--port', cli_port] if cli_port else [])
-                with patch.dict(os.environ, {} if env_port is None else {'PORT': env_port}, clear=True), patch('sys.argv', argv):
-                    main()
-                self.assertEqual(server_cls.call_args.args[0], ('127.0.0.1', expected))
-
-    @patch('pokefire.viewer.ThreadingHTTPServer')
-    @patch('sys.argv', ['pokefire'])
-    def test_invalid_env_port_rejected_before_startup(self, server_cls):
-        for value in ('abc', '', '0', '-1', '65536'):
-            with self.subTest(value=value), patch.dict(os.environ, {'PORT': value}):
-                with self.assertRaises(SystemExit) as error:
-                    main()
-                self.assertEqual(error.exception.code, 2)
-        server_cls.assert_not_called()
-
-    @patch('pokefire.viewer.signal.signal')
-    @patch('pokefire.viewer.ThreadingHTTPServer')
-    @patch('pokefire.viewer.Controller')
-    @patch('sys.argv', ['pokefire'])
-    def test_full_app_starts_monitor_and_cleans_up(self, controller_cls, server_cls, signal):
-        server_cls.return_value.serve_forever.side_effect = KeyboardInterrupt
-        main(start_monitor=True)
-        controller_cls.return_value.start.assert_called_once_with('ebay')
-        controller_cls.return_value.close.assert_called_once()
-        server_cls.return_value.server_close.assert_called_once()
-        self.assertEqual(signal.call_count, 2)
-
-    @patch('pokefire.viewer.signal.signal')
-    @patch('pokefire.viewer.ThreadingHTTPServer')
-    @patch('pokefire.viewer.Controller')
-    @patch('sys.argv', ['pokefire'])
-    def test_scraper_failure_exits_for_service_restart(self, controller_cls, server_cls, signal):
-        controller = controller_cls.return_value
-        controller.lock = threading.RLock()
-        controller.children = {'ebay': Mock()}
-        controller.children['ebay'].poll.return_value = 1
-        server = server_cls.return_value
-        server.serve_forever.side_effect = lambda: server.service_actions()
-        with self.assertRaises(SystemExit) as error:
-            main(start_monitor=True)
-        self.assertEqual(error.exception.code, 1)
-        controller.close.assert_called_once()
-        server.server_close.assert_called_once()
-
-    @patch('pokefire.viewer.signal.signal')
-    @patch('pokefire.viewer.ThreadingHTTPServer')
-    @patch('pokefire.viewer.Controller')
-    @patch('sys.argv', ['viewer'])
-    def test_viewer_only_does_not_start_monitor(self, controller_cls, server_cls, signal):
-        server_cls.return_value.serve_forever.side_effect = KeyboardInterrupt
-        main()
-        controller_cls.return_value.start.assert_not_called()
+from pokefire.viewer import Controller, request_handler_for, read_export
 
 
 class ViewerTests(unittest.TestCase):
@@ -195,7 +120,7 @@ class ViewerTests(unittest.TestCase):
         self.assertEqual(read_export(csv_path)[0]['title'], 'Pikachu')
 
     def request_handler(self, path, headers=None):
-        cls = handler_for(self.root, self.controller)
+        cls = request_handler_for(self.root, self.controller)
         handler = object.__new__(cls)
         handler.path = path
         handler.headers = headers or {'Host': '127.0.0.1:8765'}

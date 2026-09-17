@@ -1,8 +1,6 @@
-"""Serve the local Pokefire control panel: python -m pokefire.viewer (no dependencies)."""
+"""Dashboard routes and monitor controls for the Uvicorn application."""
 
-import argparse
 import csv
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import hashlib
 import os
@@ -16,7 +14,6 @@ import threading
 from urllib.parse import parse_qs, urlsplit
 
 from pokefire.listing_store import ListingStore
-from pokefire.env_config import load_env
 from pokefire.monitor_lock import running
 from pokefire.monitor import load_config, State
 
@@ -182,30 +179,31 @@ def read_export(path):
     return rows
 
 
-def handler_for(data_dir, controller=None):
+def request_handler_for(data_dir, controller=None, allowed_hosts=("localhost", "127.0.0.1")):
     data_dir = Path(data_dir).resolve()
     controller = controller or Controller()
 
-    class Handler(BaseHTTPRequestHandler):
+    class Handler:
         def reply(self, status, body, content_type="application/json"):
             if content_type == "application/json":
                 body = json.dumps(body).encode()
-            self.send_response(status)
-            self.send_header("Content-Type", content_type)
-            self.send_header("Content-Length", str(len(body)))
-            self.send_header("Cache-Control", "no-store")
-            self.send_header("X-Content-Type-Options", "nosniff")
-            self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self'; "
-                             "style-src 'self'; img-src 'self' https://*.ebayimg.com https://ebayimg.com https://assets.tcgdex.net; connect-src 'self'; "
-                             "frame-ancestors 'none'; base-uri 'none'")
-            self.end_headers()
-            self.wfile.write(body)
+            headers = {
+                "content-type": content_type,
+                "content-length": str(len(body)),
+                "cache-control": "no-store",
+                "x-content-type-options": "nosniff",
+                "content-security-policy": "default-src 'self'; script-src 'self'; "
+                    "style-src 'self'; img-src 'self' https://*.ebayimg.com https://ebayimg.com https://assets.tcgdex.net; connect-src 'self'; "
+                    "frame-ancestors 'none'; base-uri 'none'",
+            }
+            self.response = (status, [(k.encode("ascii"), v.encode("latin-1"))
+                                      for k, v in headers.items()], body)
 
         def do_GET(self):
-            # Reject foreign Host headers; bind only to loopback as well.
+            # Reject Host headers outside the configured server addresses.
             host = self.headers.get("Host", "").split(":")[0]
-            if host not in ("localhost", "127.0.0.1"):
-                return self.reply(403, {"error": "Local access only."})
+            if host not in allowed_hosts:
+                return self.reply(403, {"error": "Host not allowed."})
             url = urlsplit(self.path)
             try:
                 if url.path == "/api/status":
@@ -261,8 +259,8 @@ def handler_for(data_dir, controller=None):
 
         def do_POST(self):
             host = self.headers.get("Host", "")
-            if host.split(":")[0] not in ("localhost", "127.0.0.1") or self.headers.get("Origin") != "http://" + host:
-                return self.reply(403, {"error": "Use the local control panel for this action."})
+            if host.split(":")[0] not in allowed_hosts or self.headers.get("Origin") != "http://" + host:
+                return self.reply(403, {"error": "Use the control panel from the same origin for this action."})
             if self.headers.get("Content-Type") != "application/json":
                 return self.reply(415, {"error": "JSON required"})
             try:
@@ -287,58 +285,3 @@ def handler_for(data_dir, controller=None):
 
     return Handler
 
-
-def main(*, start_monitor=False):
-    parser = argparse.ArgumentParser(description=(
-        "Start the Pokefire dashboard and scraper together." if start_monitor else __doc__))
-    parser.add_argument("--port", type=int, help="Dashboard port (default: PORT from environment or .env, then 8765)")
-    parser.add_argument("--data-dir", type=Path, default=ROOT / "data")
-    parser.add_argument("--config", type=Path, default=ROOT / "watchlist.json")
-    args = parser.parse_args()
-    try:
-        load_env(ROOT / ".env")
-    except (OSError, ValueError) as exc:
-        parser.error(str(exc))
-    if args.port is None:
-        try:
-            args.port = int(os.environ.get("PORT", "8765"))
-        except ValueError:
-            parser.error("PORT must be an integer between 1 and 65535")
-    if not 1 <= args.port <= 65535:
-        parser.error("Port must be between 1 and 65535")
-    controller = Controller(args.config)
-    try:
-        server = ThreadingHTTPServer(("127.0.0.1", args.port), handler_for(args.data_dir, controller))
-    except OSError as exc:
-        parser.exit(1, f"Cannot start viewer: {exc}. Try --port 8766.\n")
-    print(f"Pokefire viewer: http://127.0.0.1:{server.server_port}\nExports: {args.data_dir.resolve()}", flush=True)
-    def terminate(signum, frame):
-        raise KeyboardInterrupt
-
-    previous_sigterm = signal.signal(signal.SIGTERM, terminate)
-    try:
-        if start_monitor:
-            controller.start("ebay")
-
-            def check_monitor():
-                with controller.lock:
-                    child = controller.children.get("ebay")
-                    if child is not None and child.poll() not in (None, 0):
-                        raise RuntimeError("Scraper exited; see data/logs/ebay.log")
-
-            server.service_actions = check_monitor
-        server.serve_forever()
-    except KeyboardInterrupt:
-        pass
-    except (OSError, ValueError, RuntimeError, sqlite3.Error) as exc:
-        parser.exit(1, f"Pokefire failed: {exc}\n")
-    finally:
-        try:
-            controller.close()
-        finally:
-            server.server_close()
-            signal.signal(signal.SIGTERM, previous_sigterm)
-
-
-if __name__ == "__main__":
-    main()

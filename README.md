@@ -1,44 +1,28 @@
 # Pokefire
 
-An eBay watchlist monitor using Scrapingdog, with locally saved listings and price history. Python 3.11+; no third-party Python dependencies.
+An eBay watchlist monitor using Scrapingdog, with locally saved listings and price history. Python 3.11+ with Uvicorn.
 
 Application code lives in `pokefire/`: `__main__.py` starts the app, `monitor.py` runs polling, `viewer.py` serves the dashboard, and `static/` contains dashboard assets. Runtime configuration (`.env`, `watchlist.json`) and saved `data/` live in the working directory, separate from the installed package.
 
 ## Run
 
-Put `SCRAPINGDOG_KEY` and `PORT=8767` in `.env`, then start the dashboard and scraper together:
+Put `SCRAPINGDOG_KEY` and `PORT=8767` in `.env`. From the project directory, start Uvicorn and the monitor:
 
 ```sh
-uv run pokefire
+uv run pokefire --host 192.168.0.239 --port 8767
 ```
 
-Run this from the project directory. `uv run` creates the local virtual environment automatically. Without uv, use `python3 -m pokefire` with Python 3.11+; no package installation is needed. `--port` overrides `PORT`; existing environment variables override `.env`. If no port is configured, the default is 8765. Restart the app after changing the port.
+Use the server's own LAN IP for `--host`. Open http://192.168.0.239:8767 from your network. Without `--host`, the server binds to `HOST` in `.env`, or localhost by default. This dashboard provides monitor and configuration controls without authentication; bind it only on a trusted network. `--port` overrides `PORT`; existing environment variables override `.env`.
 
-Open http://127.0.0.1:8767 to view results and control the monitor. Polling begins automatically. Ctrl+C or SIGTERM stops both processes. If the scraper fails, the application exits with an error so a service manager can restart it. Stopping the monitor in the dashboard pauses polling until you start it again or restart the application.
+**Stop:** press Ctrl+C in the terminal running Pokefire. Uvicorn shuts down and stops its managed monitor. Start it again with the same command. It runs in the foreground and does not install or enable a system service.
 
-For the dashboard alone, run `uv run python -m pokefire.viewer`. For the scraper alone, run `uv run python -m pokefire.monitor`.
+To start with polling paused, add `--no-monitor`. Use the dashboard's Start and Stop buttons to control polling while Uvicorn stays running. A failed scraper appears as an error in the dashboard and can be restarted there.
 
-### Remote Linux host
-
-Place the checkout at `/opt/pokefire`, owned by a dedicated `pokefire` user, and set `SCRAPINGDOG_KEY` and `PORT=8767` in `/opt/pokefire/.env`. Create the environment and install the supplied systemd unit:
+If you previously installed the systemd unit, turn that instance off once before starting Uvicorn manually:
 
 ```sh
-cd /opt/pokefire
-uv sync
-sudo cp deploy/pokefire.service /etc/systemd/system/pokefire.service
-sudo systemctl daemon-reload
-sudo systemctl enable --now pokefire
+sudo systemctl disable --now pokefire
 ```
-
-The service starts on boot and restarts after failures. Adjust `User`, `WorkingDirectory`, and `ExecStart` in the unit if using another user or checkout location. Check service logs with `journalctl -u pokefire -f`; scraper logs are in `data/logs/ebay.log`. Keep the checkout and `data/` on persistent storage.
-
-The dashboard binds to localhost. Access it from your computer through SSH:
-
-```sh
-ssh -N -L 8767:127.0.0.1:8767 your-user@your-host
-```
-
-Then open http://127.0.0.1:8767 on your computer.
 
 The configured watchlist contains 25 PSA 10 Gold Star cards. A shared, newly listed Buy It Now search runs every 120 seconds; an ending-soon auction search runs every 900 seconds. Local matching checks each result against enabled watchlist rules. Each search retrieves one page of up to 240 listings. This is a bounded search window, so listings beyond that window can be missed. Intervals and the shared query can be changed while the monitor is stopped.
 
@@ -59,7 +43,7 @@ Set `DISCORD_BOT_TOKEN` in `.env`, then configure the channel ID and enable aler
 ## Checks
 
 ```sh
-python -m unittest discover -s tests
+uv run python -m unittest discover -s tests
 node --check pokefire/static/app.js
 ```
 
