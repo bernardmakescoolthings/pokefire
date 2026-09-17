@@ -1,12 +1,89 @@
 import json
+import os
 from pathlib import Path
 import tempfile
+import threading
 import unittest
 from unittest.mock import patch, Mock
 
-from modules.monitor_lock import MonitorLock, running
-from pokefire import matches
-from modules.viewer import Controller, handler_for, read_export
+from pokefire.monitor_lock import MonitorLock, running
+from pokefire.monitor import matches
+from pokefire.viewer import Controller, handler_for, read_export, main
+
+
+class EntrypointTests(unittest.TestCase):
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        self.root = Path(temp.name)
+        self.enterContext(patch('pokefire.viewer.ROOT', self.root))
+        self.enterContext(patch.dict(os.environ, {}, clear=True))
+
+    @patch('pokefire.viewer.signal.signal')
+    @patch('pokefire.viewer.ThreadingHTTPServer')
+    @patch('pokefire.viewer.Controller')
+    def test_port_configuration_precedence(self, controller_cls, server_cls, signal):
+        server_cls.return_value.serve_forever.side_effect = KeyboardInterrupt
+        for file_port, env_port, cli_port, expected in [
+            (None, None, None, 8765),
+            ('9000', None, None, 9000),
+            ('9000', '9001', None, 9001),
+            ('9000', 'invalid', '9002', 9002),
+        ]:
+            with self.subTest(file=file_port, env=env_port, cli=cli_port):
+                (self.root / '.env').write_text('' if file_port is None else f'PORT={file_port}\n')
+                argv = ['pokefire'] + (['--port', cli_port] if cli_port else [])
+                with patch.dict(os.environ, {} if env_port is None else {'PORT': env_port}, clear=True), patch('sys.argv', argv):
+                    main()
+                self.assertEqual(server_cls.call_args.args[0], ('127.0.0.1', expected))
+
+    @patch('pokefire.viewer.ThreadingHTTPServer')
+    @patch('sys.argv', ['pokefire'])
+    def test_invalid_env_port_rejected_before_startup(self, server_cls):
+        for value in ('abc', '', '0', '-1', '65536'):
+            with self.subTest(value=value), patch.dict(os.environ, {'PORT': value}):
+                with self.assertRaises(SystemExit) as error:
+                    main()
+                self.assertEqual(error.exception.code, 2)
+        server_cls.assert_not_called()
+
+    @patch('pokefire.viewer.signal.signal')
+    @patch('pokefire.viewer.ThreadingHTTPServer')
+    @patch('pokefire.viewer.Controller')
+    @patch('sys.argv', ['pokefire'])
+    def test_full_app_starts_monitor_and_cleans_up(self, controller_cls, server_cls, signal):
+        server_cls.return_value.serve_forever.side_effect = KeyboardInterrupt
+        main(start_monitor=True)
+        controller_cls.return_value.start.assert_called_once_with('ebay')
+        controller_cls.return_value.close.assert_called_once()
+        server_cls.return_value.server_close.assert_called_once()
+        self.assertEqual(signal.call_count, 2)
+
+    @patch('pokefire.viewer.signal.signal')
+    @patch('pokefire.viewer.ThreadingHTTPServer')
+    @patch('pokefire.viewer.Controller')
+    @patch('sys.argv', ['pokefire'])
+    def test_scraper_failure_exits_for_service_restart(self, controller_cls, server_cls, signal):
+        controller = controller_cls.return_value
+        controller.lock = threading.RLock()
+        controller.children = {'ebay': Mock()}
+        controller.children['ebay'].poll.return_value = 1
+        server = server_cls.return_value
+        server.serve_forever.side_effect = lambda: server.service_actions()
+        with self.assertRaises(SystemExit) as error:
+            main(start_monitor=True)
+        self.assertEqual(error.exception.code, 1)
+        controller.close.assert_called_once()
+        server.server_close.assert_called_once()
+
+    @patch('pokefire.viewer.signal.signal')
+    @patch('pokefire.viewer.ThreadingHTTPServer')
+    @patch('pokefire.viewer.Controller')
+    @patch('sys.argv', ['viewer'])
+    def test_viewer_only_does_not_start_monitor(self, controller_cls, server_cls, signal):
+        server_cls.return_value.serve_forever.side_effect = KeyboardInterrupt
+        main()
+        controller_cls.return_value.start.assert_not_called()
 
 
 class ViewerTests(unittest.TestCase):
@@ -60,13 +137,14 @@ class ViewerTests(unittest.TestCase):
         finally:
             lock.close()
 
-    @patch('modules.viewer.subprocess.Popen')
+    @patch('pokefire.viewer.subprocess.Popen')
     def test_managed_process_start_stop_and_error(self, popen):
         child = Mock()
         child.poll.return_value = None
         popen.return_value = child
         self.controller.start('ebay')
         command = popen.call_args.args[0]
+        self.assertEqual(command[1:4], ['-u', '-m', 'pokefire.monitor'])
         self.assertEqual(command[-2:], ['--source', 'ebay'])
         self.assertTrue(self.controller.status()['ebay']['managed'])
         with self.assertRaises(ValueError):
@@ -77,7 +155,7 @@ class ViewerTests(unittest.TestCase):
         self.assertEqual(self.controller.status()['ebay']['state'], 'error')
 
     def test_status_changes_only_after_poll_processing_commits(self):
-        from modules.listing_store import ListingStore
+        from pokefire.listing_store import ListingStore
         store = ListingStore(self.controller.state_path())
         self.assertEqual(self.controller.status()['ebay']['completed_poll'], 0)
         poll, observed = store.archive('https://www.ebay.com/sch/i.html', 'FIXED_PRICE', {})
@@ -135,8 +213,8 @@ class ViewerTests(unittest.TestCase):
         self.assertEqual(h.reply.call_args.args[0], 403)
 
     def test_history_api_filters_locally_and_rejects_retired_source(self):
-        from modules.listing_store import ListingStore
-        from modules.scrapingdog import normalize_results
+        from pokefire.listing_store import ListingStore
+        from pokefire.scrapingdog import normalize_results
         store=ListingStore(self.controller.state_path())
         payload={'search_results':[{'itemId':'123','title':'Rayquaza Gold Star PSA 10','price':'$400'}]}
         pid,at=store.archive('https://www.ebay.com/sch/i.html','FIXED_PRICE',payload)

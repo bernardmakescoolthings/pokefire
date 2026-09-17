@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from modules.env_config import load_env
+from pokefire.env_config import load_env
 
 
 class EnvConfigTests(unittest.TestCase):

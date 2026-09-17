@@ -1,0 +1,16 @@
+[Unit]
+Description=Pokefire dashboard and eBay scraper
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=pokefire
+WorkingDirectory=/opt/pokefire
+ExecStart=/opt/pokefire/.venv/bin/pokefire
+Restart=on-failure
+RestartSec=30
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

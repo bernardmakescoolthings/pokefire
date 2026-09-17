@@ -1,7 +1,7 @@
 import tempfile
 import unittest
 from pathlib import Path
-from modules.listing_store import ListingStore
+from pokefire.listing_store import ListingStore
 
 class ListingHistoryTests(unittest.TestCase):
     def setUp(self):

@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 from urllib.parse import parse_qs, urlparse
 
-from pokefire import ApiError, EbayClient, State, build_query, load_config, matches, poll
+from pokefire.monitor import ApiError, EbayClient, State, build_query, load_config, matches, poll
 
 
 def item(identifier, title="Charizard Base Set", date=None):

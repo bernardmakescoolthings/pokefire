@@ -8,9 +8,9 @@ import unittest
 from unittest.mock import patch
 from urllib.parse import parse_qs, urlparse
 
-from modules.listing_store import ListingStore
-from modules.scrapingdog import ScrapingdogClient, normalize_results
-from pokefire import ApiError, State, load_config, poll
+from pokefire.listing_store import ListingStore
+from pokefire.scrapingdog import ScrapingdogClient, normalize_results
+from pokefire.monitor import ApiError, State, load_config, poll
 
 
 def row(identifier='123', **kwargs):
@@ -137,7 +137,7 @@ class ScrapingdogTests(unittest.TestCase):
         self.assertEqual(self.store.history('123')[0]['status'],'sold')
 
     def test_listing_with_both_buying_modes_keeps_fixed_price(self):
-        from pokefire import fetch_items
+        from pokefire.monitor import fetch_items
         client=ScrapingdogClient(self.config,lambda _: {'search_results':[row()]})
         items,_=fetch_items(client,self.config)
         self.assertEqual(set(items['123']['buyingOptions']),{'FIXED_PRICE','AUCTION'})
@@ -145,7 +145,7 @@ class ScrapingdogTests(unittest.TestCase):
         self.assertEqual(items['123']['currentBidPrice']['value'],'100.00')
 
     def test_thumbnail_is_saved_with_matching_listing_and_alert(self):
-        from pokefire import alert_payload
+        from pokefire.monitor import alert_payload
         url='https://i.ebayimg.com/images/g/example/s-l500.webp'
         client=ScrapingdogClient(self.config,lambda _: {'search_results':[row(thumbnail=url)]})
         result=client.search_page(0,'FIXED_PRICE')['itemSummaries'][0]

@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from pokefire import build_query, load_config, matches
+from pokefire.monitor import build_query, load_config, matches
 
 
 class GoldStarTests(unittest.TestCase):

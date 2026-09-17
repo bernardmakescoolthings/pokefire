@@ -7,9 +7,9 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 from urllib.error import HTTPError, URLError
 
-from modules.discord_bot import DiscordBot, DiscordDeliveryError, message, notifier, validate
-from pokefire import State, alert_payload, load_config, main, poll
-from modules.viewer import Controller
+from pokefire.discord_bot import DiscordBot, DiscordDeliveryError, message, notifier, validate
+from pokefire.monitor import State, alert_payload, load_config, main, poll
+from pokefire.viewer import Controller
 
 
 class DiscordTests(unittest.TestCase):
@@ -19,7 +19,7 @@ class DiscordTests(unittest.TestCase):
             'price': {'value': '100', 'currency': 'USD'}}
 
     @patch.dict(os.environ, {}, clear=True)
-    @patch('modules.discord_bot.urlopen')
+    @patch('pokefire.discord_bot.urlopen')
     def test_disabled_needs_no_token_and_sends_nothing(self, open_url):
         terminal = Mock()
         notifier({'discord': {'enabled': False}}, terminal, alert_payload)(self.item, ['Charizard'])
@@ -35,7 +35,7 @@ class DiscordTests(unittest.TestCase):
         self.assertNotIn('secret', str(caught.exception))
 
     @patch.dict(os.environ, {}, clear=True)
-    @patch('modules.discord_bot.urlopen')
+    @patch('pokefire.discord_bot.urlopen')
     def test_fixture_never_initializes_discord(self, open_url):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'watchlist.json'
@@ -73,7 +73,7 @@ class DiscordTests(unittest.TestCase):
             self.assertEqual(load_config(path)['discord'], self.config['discord'])
 
     @patch.dict(os.environ, {'DISCORD_BOT_TOKEN': 'private-token'})
-    @patch('modules.discord_bot.urlopen')
+    @patch('pokefire.discord_bot.urlopen')
     def test_request_and_safe_message(self, open_url):
         DiscordBot(self.config).send(alert_payload(self.item, ['Charizard']))
         request = open_url.call_args.args[0]
@@ -87,7 +87,7 @@ class DiscordTests(unittest.TestCase):
         self.assertLessEqual(len(message(payload)['content']), 2000)
 
     @patch.dict(os.environ, {'DISCORD_BOT_TOKEN': 'private-token'})
-    @patch('modules.discord_bot.urlopen')
+    @patch('pokefire.discord_bot.urlopen')
     def test_errors_are_sanitized_and_rate_limits_preserved(self, open_url):
         bot = DiscordBot(self.config)
         for status in (401, 403, 404, 429, 500):
@@ -102,7 +102,7 @@ class DiscordTests(unittest.TestCase):
             bot.send(alert_payload(self.item, []))
 
     @patch.dict(os.environ, {'DISCORD_BOT_TOKEN': 'private-token'})
-    @patch('modules.discord_bot.urlopen')
+    @patch('pokefire.discord_bot.urlopen')
     def test_failed_delivery_remains_retryable_without_resetting_scope(self, open_url):
         with tempfile.TemporaryDirectory() as directory:
             config = load_config('fixtures/watchlist.example.json')

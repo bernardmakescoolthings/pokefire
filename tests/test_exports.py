@@ -4,7 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from pokefire import State, export_rows, load_config, poll
+from pokefire.monitor import State, export_rows, load_config, poll
 from test_pokefire import FakeClient, item
 
 

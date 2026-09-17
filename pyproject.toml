@@ -6,6 +6,15 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []
 
-[tool.uv]
-# Run from the checkout, where the watchlist and viewer assets live.
-package = false
+[project.scripts]
+pokefire = "pokefire.__main__:main"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["pokefire"]
+
+[tool.setuptools.package-data]
+pokefire = ["static/*"]
