@@ -31,7 +31,7 @@ If you previously installed the systemd unit, turn that instance off once before
 sudo systemctl disable --now pokefire
 ```
 
-The configured watchlist contains 25 PSA 10 Gold Star cards. A shared, newly listed Buy It Now search runs every 120 seconds; an ending-soon auction search runs every 900 seconds. Local matching checks each result against enabled watchlist rules. Each search retrieves one page of up to 240 listings. This is a bounded search window, so listings beyond that window can be missed. Intervals and the shared query can be changed while the monitor is stopped.
+The configured watchlist contains 25 PSA 10 Gold Star cards. A shared, newly listed Buy It Now search runs every 120 seconds; an ending-soon auction search runs every 900 seconds. The shared query is `PSA 10 ("gold star",goldstar) -celebrations -25th -2021 -japanese -jpn`. It avoids broad standalone star and card-number matches, but can miss listings titled only with a card number or star symbol. Local matching checks each result against enabled watchlist rules. Each search retrieves one page of up to 240 listings. This is a bounded search window, so listings beyond that window can be missed. Intervals and the shared query can be changed while the monitor is stopped.
 
 ## Offers and history
 

@@ -20,10 +20,8 @@ class GoldStarTests(unittest.TestCase):
         self.assertEqual(set(self.rules), expected)
         self.assertEqual(len(self.config["watchlist"]), 25)
         self.assertEqual(sum(r.get('kind') == 'set' for r in self.config['watchlist']), 0)
-        self.assertTrue(build_query(self.config).startswith('PSA 10 (star,goldstar,'))
+        self.assertTrue(build_query(self.config).startswith('PSA 10 ("gold star",goldstar)'))
         self.assertLessEqual(len(build_query(self.config)),100)
-        for rule in self.rules.values():
-            self.assertIn(rule['card']['number'].split('/')[0],build_query(self.config))
         for name, rule in self.rules.items():
             for grade in (8, 8.5, 9, 10):
                 title = f'{name} Gold Star {rule["card"]["set"]} PSA {grade}'

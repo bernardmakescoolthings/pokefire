@@ -1312,7 +1312,7 @@
       "image_url": "https://assets.tcgdex.net/en/ex/ex16/102/low.webp"
     }
   ],
-  "query": "PSA 10 (star,goldstar,90,91,92,99,100,101,102,103,104,105,106,107,108,109,111,112,113,114,115)",
+  "query": "PSA 10 (\"gold star\",goldstar) -celebrations -25th -2021 -japanese -jpn",
   "environment": "production",
   "ebay_poll_seconds": 120,
   "auction_poll_seconds": 900
