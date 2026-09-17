@@ -7,10 +7,12 @@ An eBay watchlist monitor using Scrapingdog, with locally saved listings and pri
 Put `SCRAPINGDOG_KEY` in `.env`, then start the local viewer:
 
 ```sh
-python -m modules.viewer --port 8767
+uv run python -m modules.viewer --port 8767
 ```
 
-Open http://127.0.0.1:8767 and use **Start monitor** to begin polling. Starting the viewer alone does not poll eBay. Alternatively, run `python pokefire.py` in a terminal.
+Run this from the project directory. `uv run` creates the local virtual environment automatically. Without uv, use `python3 -m modules.viewer --port 8767` with Python 3.11+; no package installation is needed.
+
+Open http://127.0.0.1:8767 and use **Start monitor** to begin polling. Starting the viewer alone does not poll eBay. Alternatively, run `uv run python pokefire.py` in a terminal.
 
 The configured watchlist contains 25 PSA 10 Gold Star cards. A shared, newly listed Buy It Now search runs every 120 seconds; an ending-soon auction search runs every 900 seconds. Local matching checks each result against enabled watchlist rules. Each search retrieves one page of up to 240 listings. This is a bounded search window, so listings beyond that window can be missed. Intervals and the shared query can be changed while the monitor is stopped.
 

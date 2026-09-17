@@ -1,0 +1,11 @@
+[project]
+name = "pokefire"
+version = "0.1.0"
+description = "An eBay watchlist monitor using Scrapingdog, with local listings and price history."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.uv]
+# Run from the checkout, where the watchlist and viewer assets live.
+package = false
