@@ -16,6 +16,7 @@ from urllib.parse import parse_qs, urlsplit
 from pokefire.listing_store import ListingStore
 from pokefire.monitor_lock import running
 from pokefire.monitor import load_config, State
+from pokefire.config_json import loads as load_config_json, comment_lines
 
 ROOT = Path.cwd()
 ASSETS = Path(__file__).resolve().parent / "static"
@@ -30,7 +31,7 @@ class Controller:
 
     def config(self):
         raw = self.config_path.read_bytes()
-        return {"config": json.loads(raw), "revision": hashlib.sha256(raw).hexdigest()}
+        return {"config": load_config_json(raw.decode()), "revision": hashlib.sha256(raw).hexdigest()}
 
     def state_path(self):
         return ROOT / load_config(self.config_path)["state_file"]
@@ -106,6 +107,8 @@ class Controller:
             try:
                 with tempfile.NamedTemporaryFile("w", dir=self.config_path.parent, delete=False) as file:
                     name = file.name
+                    file.writelines(line.rstrip('\r\n') + '\n' for line in
+                                    comment_lines(self.config_path.read_text()))
                     json.dump(config, file, ensure_ascii=False, indent=2)
                     file.write("\n")
                 load_config(name)
@@ -284,4 +287,3 @@ def request_handler_for(data_dir, controller=None, allowed_hosts=("localhost", "
                 self.reply(400, {"error": str(exc)})
 
     return Handler
-

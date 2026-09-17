@@ -55,3 +55,5 @@ node --check pokefire/static/app.js
 ```
 
 Watchlist `image_url` fields contain card artwork from TCGdex, matched by set and collector number. The page loads those images directly; listing photos still come from eBay. Artwork requires no Scrapingdog credits.
+
+`watchlist.json` supports standalone `//` comment lines. Dashboard saves preserve these comments at the top of the file. Inline and block comments are not supported.

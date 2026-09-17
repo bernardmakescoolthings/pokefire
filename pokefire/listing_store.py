@@ -95,6 +95,9 @@ class ListingStore:
         page = max(1, int(page))
         limit = min(250, max(1, int(limit)))
         clauses, args = [], []
+        availability = """CASE WHEN l.status='active' AND
+            julianday(json_extract(l.payload,'$.itemEndDate')) <= julianday('now')
+            THEN 'ended' ELSE l.status END"""
         if item_id:
             clauses.append('l.item_id=?')
             args.append(item_id)
@@ -110,12 +113,13 @@ class ListingStore:
             clauses.append("EXISTS (SELECT 1 FROM json_each(l.payload,'$.buyingOptions') WHERE value=?)")
             args.append(mode)
         if status:
-            if status not in ('active','sold','ended'):
+            if status not in ('active','sold','ended','unavailable'):
                 raise ValueError('Invalid listing status')
-            clauses.append('l.status=?')
-            args.append(status)
-            if status == 'active':
-                clauses.append("(julianday(json_extract(l.payload,'$.itemEndDate')) IS NULL OR julianday(json_extract(l.payload,'$.itemEndDate')) > julianday('now'))")
+            if status == 'unavailable':
+                clauses.append(f"({availability}) IN ('sold','ended')")
+            else:
+                clauses.append(f'({availability})=?')
+                args.append(status)
         price = "json_extract(l.payload,'$.currentBidPrice.value')" if mode == 'AUCTION' else "coalesce(json_extract(l.payload,'$.price.value'),json_extract(l.payload,'$.currentBidPrice.value'))"
         currency = "json_extract(l.payload,'$.currentBidPrice.currency')" if mode == 'AUCTION' else "coalesce(json_extract(l.payload,'$.price.currency'),json_extract(l.payload,'$.currentBidPrice.currency'))"
         import math
@@ -134,7 +138,7 @@ class ListingStore:
         with closing(self.connect()) as db:
             db.row_factory = sqlite3.Row
             total = db.execute('SELECT count(*) FROM listings l'+where,args).fetchone()[0]
-            rows = [dict(r) for r in db.execute('SELECT l.* FROM listings l'+where+
+            rows = [dict(r) for r in db.execute(f'SELECT l.*, {availability} AS availability_status FROM listings l'+where+
                      ' ORDER BY l.first_seen_at DESC,l.item_id LIMIT ? OFFSET ?', args+[limit,(page-1)*limit])]
             for row in rows:
                 row['payload'] = json.loads(row['payload'])

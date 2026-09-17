@@ -1312,6 +1312,9 @@
       "image_url": "https://assets.tcgdex.net/en/ex/ex16/102/low.webp"
     }
   ],
+  // Original broad query: PSA 10 (star,goldstar,90,91,92,99,100,101,102,103,104,105,106,107,108,109,111,112,113,114,115)
+  // Original eBay search: https://www.ebay.com/sch/i.html?_nkw=PSA+10+%28star%2Cgoldstar%2C90%2C91%2C92%2C99%2C100%2C101%2C102%2C103%2C104%2C105%2C106%2C107%2C108%2C109%2C111%2C112%2C113%2C114%2C115%29&_sacat=183454&_sop=10&_ipg=240&_pgn=1&LH_BIN=1
+  // Current eBay search: https://www.ebay.com/sch/i.html?_nkw=PSA+10+%28%22gold+star%22%2Cgoldstar%29+-celebrations+-25th+-2021+-japanese+-jpn&_sacat=183454&_sop=10&_ipg=240&_pgn=1&LH_BIN=1
   "query": "PSA 10 (\"gold star\",goldstar) -celebrations -25th -2021 -japanese -jpn",
   "environment": "production",
   "ebay_poll_seconds": 120,

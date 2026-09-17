@@ -35,3 +35,5 @@ input[type=checkbox]{accent-color:#ff7932}
 .view-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.listing-dates{font-size:12px;color:var(--muted);line-height:1.5}.listing-dates p{margin:5px 0}.history .offer{margin:12px 0}.history table{width:100%;text-align:left}.history td,.history th{padding:8px}
 
 #watchlist-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.watch-row{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}.watchlist-image{width:70px;height:98px;object-fit:contain;flex-shrink:0;border-radius:5px}.watch-row label{line-height:1.5;cursor:pointer}.watch-row input{flex-shrink:0}
+
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.chip.chip-bin{color:#9de3c2;background:#12372c;border:1px solid #376e58}.chip.chip-auction{color:#c9bcff;background:#2b2246;border:1px solid #66518e}.chip.chip-unavailable{color:#ffb8ad;background:#411e20;border:1px solid #945052}.chip.chip-availability{color:#d5c6b9;background:#292321;border:1px solid #615147}.offer.offer-unavailable{border-left:3px solid #945052}

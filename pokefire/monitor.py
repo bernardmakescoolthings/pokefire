@@ -18,6 +18,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from pokefire.env_config import load_env
+from pokefire.config_json import loads as load_config_json
 from pokefire.monitor_lock import MonitorLock
 
 LOG = logging.getLogger("pokefire")
@@ -85,7 +86,7 @@ def build_query(config):
 def load_config(path, source="ebay"):
     if source != "ebay":
         raise ValueError("Only eBay is supported")
-    config = json.loads(Path(path).read_text())
+    config = load_config_json(Path(path).read_text())
     if not isinstance(config, dict):
         raise ValueError("Config must be an object")
     defaults = {"poll_seconds": 120, "marketplace": "EBAY_US", "category_id": "183454",

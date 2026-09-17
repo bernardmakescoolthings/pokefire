@@ -39,3 +39,20 @@ class ListingHistoryTests(unittest.TestCase):
         self.assertEqual([r['item_id'] for r in rows],['2'])
         for bounds in [{'minimum':'nan'},{'minimum':'-1'},{'minimum':'500','maximum':'100'}]:
             with self.assertRaises(ValueError):self.store.history_page(**bounds)
+
+    def test_unavailable_preserves_sale_type_and_observed_status(self):
+        self.save('1',400,'sold')
+        self.save('2',200,'ended',mode='AUCTION')
+        self.save('3',300,mode='AUCTION',end='2020-01-01T00:00:00Z')
+        self.save('4',400)
+        self.save('5',500,end='invalid')
+        rows={r['item_id']:r for r in self.store.history_page(status='unavailable')['rows']}
+        self.assertEqual(set(rows),{'1','2','3'})
+        self.assertEqual(rows['1']['availability_status'],'sold')
+        self.assertEqual(rows['1']['payload']['buyingOptions'],['FIXED_PRICE'])
+        self.assertEqual(rows['3']['availability_status'],'ended')
+        self.assertEqual(rows['3']['status'],'active')
+        self.assertEqual(rows['3']['payload']['buyingOptions'],['AUCTION'])
+        self.assertEqual(self.store.history_page(status='unavailable',mode='AUCTION')['total'],2)
+        self.assertEqual(self.store.history_page(status='ended')['total'],2)
+        self.assertEqual(self.store.history_page(status='active')['total'],2)

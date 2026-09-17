@@ -62,6 +62,19 @@ class ViewerTests(unittest.TestCase):
         finally:
             lock.close()
 
+    def test_literal_comments_survive_dashboard_save(self):
+        from pokefire.monitor import load_config
+        comments = '// Original query: PSA 10 (star,goldstar)\n// https://www.ebay.com/sch/i.html?_nkw=star\n'
+        self.path.write_text(comments + self.path.read_text())
+        payload = self.controller.config()
+        payload['config']['watchlist'][0]['image_url'] = 'https://example.com/card.png'
+        payload['config']['poll_seconds'] = 45
+        self.controller.save(payload)
+        self.assertTrue(self.path.read_text().startswith(comments))
+        loaded = load_config(self.path)
+        self.assertEqual(loaded['poll_seconds'], 45)
+        self.assertEqual(loaded['watchlist'][0]['image_url'], 'https://example.com/card.png')
+
     @patch('pokefire.viewer.subprocess.Popen')
     def test_managed_process_start_stop_and_error(self, popen):
         child = Mock()
