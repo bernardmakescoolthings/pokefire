@@ -6,13 +6,20 @@ Application code lives in `pokefire/`: `__main__.py` starts the app, `monitor.py
 
 ## Run
 
-Put `SCRAPINGDOG_KEY` and `PORT=8767` in `.env`. From the project directory, start Uvicorn and the monitor:
+Put `SCRAPINGDOG_KEY` in `.env` and set the dashboard address:
 
-```sh
-uv run pokefire --host 192.168.0.239 --port 8767
+```dotenv
+HOST=192.168.0.239
+PORT=8767
 ```
 
-Use the server's own LAN IP for `--host`. Open http://192.168.0.239:8767 from your network. Without `--host`, the server binds to `HOST` in `.env`, or localhost by default. This dashboard provides monitor and configuration controls without authentication; bind it only on a trusted network. `--port` overrides `PORT`; existing environment variables override `.env`.
+From the project directory, start Uvicorn and the monitor:
+
+```sh
+uv run pokefire
+```
+
+Use the server's own LAN IP for `HOST`. CLI flags `--host` and `--port` override these settings. Open http://192.168.0.239:8767 from your network. Without `--host`, the server binds to `HOST` in `.env`, or localhost by default. This dashboard provides monitor and configuration controls without authentication; bind it only on a trusted network. `--port` overrides `PORT`; existing environment variables override `.env`.
 
 **Stop:** press Ctrl+C in the terminal running Pokefire. Uvicorn shuts down and stops its managed monitor. Start it again with the same command. It runs in the foreground and does not install or enable a system service.
 
